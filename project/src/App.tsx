@@ -7,6 +7,7 @@ import About from './components/About';
 import Footer from './components/Footer';
 import Contact from './components/contact';
 import ScheduleConsultation from './pages/ScheduleConsultation';
+import EnrollmentForm from './pages/EnrollmentForm';
 
 function App() {
   return (
@@ -28,6 +29,14 @@ function App() {
         <div className="min-h-screen">
             <Header />
             <ScheduleConsultation />
+            <Footer />
+          </div>
+      } 
+      />
+      <Route path="/enroll" element={
+        <div className="min-h-screen">
+            <Header />
+            <EnrollmentForm />
             <Footer />
           </div>
       } 
