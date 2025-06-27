@@ -17,7 +17,7 @@ const Footer = () => {
       { name: 'About Us', href: '#about' },
       { name: 'Our Team', href: '#team' },
       { name: 'Schedule a Call', href: '/consultation' },
-      // { name: 'News & Updates', href: '/news' },
+      { name: 'Enroll Now', href: '/enroll' },
       { name: 'Contact Us', href: '#contact' },
       // { name: 'Privacy Policy', href: '/privacy' }
     ]
@@ -121,7 +121,7 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -150,7 +150,7 @@ const Footer = () => {
               </motion.button>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Bottom Footer */}
         <motion.div

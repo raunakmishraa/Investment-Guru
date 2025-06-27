@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, PieChart, Shield, Target, Users, BookOpen, DollarSign, BarChart3, Sparkles, Move, Undo2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
   const services = [
@@ -40,6 +41,16 @@ const Services = () => {
       color: 'from-secondary-600 to-primary-500'
     }
   ];
+
+  const navigate = useNavigate();
+
+  const handleConsultationClick = () => {
+    navigate('/consultation');
+  };
+
+  const handleEnrollClick = () => {
+    navigate('/enroll');
+  };
 
   return (
     <section id="services" className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -126,6 +137,7 @@ const Services = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={handleEnrollClick}
                   className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
                 >
                   Enroll Now
@@ -148,14 +160,14 @@ const Services = () => {
             <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
               Get personalized investment advice from our expert team. Schedule a free consultation today.
             </p>
-            <motion.a
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href='/consultation'
+              onClick={handleConsultationClick}
               className="bg-white text-primary-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300"
             >
               Schedule Free Consultation
-            </motion.a>
+            </motion.button>
           </div>
         </motion.div>
       </div>

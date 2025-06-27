@@ -17,6 +17,10 @@ import {
   Building,
 } from "lucide-react";
 
+// Your Google Apps Script Web App URL
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxb2oDjMmUu5T9oIfLEWe6pHP_r0XtOeEUTCsR5oTIAL6zAKCZLm9BGpWw98yOAQ6HiwQ/exec";
+
 const ScheduleConsultation = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -26,10 +30,10 @@ const ScheduleConsultation = () => {
     preferredDate: "",
     preferredTime: "",
     consultationType: "",
-    investmentGoals: "",
-    currentInvestments: "",
-    riskTolerance: "",
-    investmentAmount: "",
+    // Removed: investmentGoals: "",
+    // Removed: currentInvestments: "",
+    // Removed: riskTolerance: "",
+    // Removed: investmentAmount: "",
     message: "",
     hearAboutUs: "",
   });
@@ -53,15 +57,48 @@ const ScheduleConsultation = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle"); // Reset status on new submission
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    // Convert formData object to URLSearchParams
+    const params = new URLSearchParams();
+    for (const key in formData) {
+      // Ensure key is a valid key from formData
+      if (Object.prototype.hasOwnProperty.call(formData, key)) {
+        params.append(key, formData[key as keyof typeof formData]);
+      }
+    }
+
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: params, // Send data as URLSearchParams
+        mode: "no-cors", // Required for Google Apps Script
+      });
+
+      // Google Apps Script will always return status 200 with 'no-cors'
+      // You'll need to check your Apps Script execution logs for actual success/failure.
+      // For a client-side indication, we'll assume success if no network error.
       setSubmitStatus("success");
+      setFormData({ // Optionally reset form data on success
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        preferredDate: "",
+        preferredTime: "",
+        consultationType: "",
+        message: "",
+        hearAboutUs: "",
+      });
 
-      // Reset success message after 5 seconds
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+      // Reset success/error message after 5 seconds
       setTimeout(() => setSubmitStatus("idle"), 5000);
-    }, 2000);
+    }
   };
 
   const consultationTypes = [
@@ -101,8 +138,6 @@ const ScheduleConsultation = () => {
   ];
 
   const timeSlots = [
-    "9:00 AM",
-    "9:30 AM",
     "10:00 AM",
     "10:30 AM",
     "11:00 AM",
@@ -118,7 +153,6 @@ const ScheduleConsultation = () => {
     "4:00 PM",
     "4:30 PM",
     "5:00 PM",
-    "5:30 PM",
   ];
 
   return (
@@ -212,6 +246,28 @@ const ScheduleConsultation = () => {
                 Thank you for scheduling your free consultation. Our team will
                 contact you within 24 hours to confirm your appointment and
                 provide meeting details.
+              </p>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Error Message */}
+        {submitStatus === "error" && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 p-6 bg-red-50 border border-red-200 rounded-xl flex items-start"
+          >
+            <AlertCircle
+              size={24}
+              className="text-red-600 mr-4 flex-shrink-0 mt-1"
+            />
+            <div>
+              <h3 className="text-red-800 font-semibold mb-2">
+                Submission Failed!
+              </h3>
+              <p className="text-red-700">
+                There was an error scheduling your consultation. Please try again later or contact us directly.
               </p>
             </div>
           </motion.div>
@@ -420,7 +476,7 @@ const ScheduleConsultation = () => {
               </div>
             </div>
 
-            {/* Investment Information */}
+            {/* Investment Information - Commented out as per your original code */}
             {/* <div>
               <h3 className="text-lg font-semibold text-accent-900 mb-4 flex items-center">
                 <Target size={20} className="text-primary-600 mr-2" />
@@ -624,7 +680,6 @@ const ScheduleConsultation = () => {
           </Link>
         </motion.div>
       </div>
-
     </section>
   );
 };

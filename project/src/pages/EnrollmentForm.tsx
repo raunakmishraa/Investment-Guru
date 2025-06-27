@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
-import { User, Mail, Phone, GraduationCap, CreditCard, Calendar, Clock, Star, CheckCircle, BookOpen } from 'lucide-react';
+import { User, Mail, Phone, GraduationCap, Calendar, Clock, Star, CheckCircle, BookOpen } from 'lucide-react';
 
 interface FormData {
   firstName: string;
@@ -8,8 +8,6 @@ interface FormData {
   email: string;
   phone: string;
   course: string;
-  experience: string;
-  paymentMethod: string;
   agreeTerms: boolean;
 }
 
@@ -20,46 +18,57 @@ const EnrollmentForm: React.FC = () => {
     email: '',
     phone: '',
     course: '',
-    experience: '',
-    paymentMethod: '',
     agreeTerms: false
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submissionMessage, setSubmissionMessage] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  // !!! IMPORTANT: Replace with your Google Apps Script Web App URL !!!
+  const APPS_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby7SDuXj8vf-hOJEsIKo9DdFQlQO2FQWtVI3OGNctpbjQGeFUdgpH9AbxwOJ68j-jIh/exec";
 
   const courses = [
     {
       id: 'beginner-trading',
-      name: 'Beginner Trading Fundamentals',
+      name: 'Stock Market 101: Decode the Basics',
       duration: '8 weeks',
-      price: '$299',
+      price: 'NRs. 3000',
       rating: 4.9,
-      students: 2847
+      students: 280
     },
     {
-      id: 'advanced-portfolio',
-      name: 'Advanced Portfolio Management',
+      id: 'advanced-course',
+      name: 'Advance Course: Technical Analysis Mastery',
       duration: '12 weeks',
-      price: '$599',
+      price: 'NRs. 5000',
       rating: 4.8,
-      students: 1523
+      students: 152
     },
     {
-      id: 'crypto-mastery',
-      name: 'Cryptocurrency Investment Mastery',
+      id: 'transformation-course',
+      name: 'Basic to Advance course: Complete Transformation Program',
       duration: '6 weeks',
-      price: '$399',
+      price: 'NRs. 10,000',
       rating: 4.7,
-      students: 3241
+      students: 41
     },
     {
-      id: 'real-estate',
-      name: 'Real Estate Investment Strategy',
+      id: 'pro-course',
+      name: 'Pro Trader: Mastering the Market Moves',
       duration: '10 weeks',
-      price: '$499',
+      price: 'NRs. 12,000',
       rating: 4.9,
-      students: 1876
+      students: 76
+    },
+    {
+      id: 'recovery-course',
+      name: 'From Loss to Profit: The Recovery Course',
+      duration: '10 weeks',
+      price: 'NRs. 15,000',
+      rating: 4.9,
+      students: 87
     }
   ];
 
@@ -74,12 +83,55 @@ const EnrollmentForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
+    setSubmissionMessage('');
+    setIsError(false);
+
+    try {
+      // Find the selected course name to send to Apps Script
+      const selectedCourseName = courses.find(c => c.id === formData.course)?.name || 'N/A';
+
+      // Create a FormData object for URLSearchParams (as Apps Script expects form-encoded data)
+      const formUrlEncodedData = new URLSearchParams();
+      formUrlEncodedData.append('firstName', formData.firstName);
+      formUrlEncodedData.append('lastName', formData.lastName);
+      formUrlEncodedData.append('email', formData.email);
+      formUrlEncodedData.append('phone', formData.phone);
+      formUrlEncodedData.append('course', selectedCourseName); // Send the full course name
+      formUrlEncodedData.append('agreeTerms', String(formData.agreeTerms)); // Convert boolean to string
+
+      // Also append the full name as 'name' for the Apps Script side if needed for email/sheet
+      formUrlEncodedData.append('name', `${formData.firstName} ${formData.lastName}`);
+
+      // If your Apps Script expects 'subject' and 'message' for the email, you can add them:
+      formUrlEncodedData.append('subject', `New Enrollment for ${selectedCourseName}`);
+      formUrlEncodedData.append('message', `Enrollment details for ${formData.firstName} ${formData.lastName}:\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCourse: ${selectedCourseName}`);
+
+      const response = await fetch(APPS_SCRIPT_WEB_APP_URL, {
+        method: 'POST',
+        mode: 'cors', // Crucial for cross-origin requests to Apps Script
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded', // Important for Apps Script doPost
+        },
+        body: formUrlEncodedData.toString(),
+      });
+
+      const result = await response.json(); // Apps Script returns JSON
+
+      if (result.success) {
+        setSubmitted(true);
+        setSubmissionMessage(result.message || "Enrollment successful!");
+        setIsError(false);
+      } else {
+        setSubmissionMessage(result.error || "Enrollment failed. Please try again.");
+        setIsError(true);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmissionMessage("An unexpected error occurred. Please try again later.");
+      setIsError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const selectedCourse = courses.find(course => course.id === formData.course);
@@ -89,29 +141,37 @@ const EnrollmentForm: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-red-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-10 h-10 text-green-600" />
+            {isError ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <CheckCircle className="w-10 h-10 text-green-600" />
+            )}
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Enrollment Successful!</h2>
-          <p className="text-gray-600 mb-6">
-            Welcome to Investment Guru! You'll receive a confirmation email shortly with your course access details.
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            {isError ? "Enrollment Failed!" : "Enrollment Successful!"}
+          </h2>
+          <p className={`mb-6 ${isError ? 'text-red-600' : 'text-gray-600'}`}>
+            {submissionMessage}
+            {!isError && " Welcome to Investment Guru! You'll receive a confirmation email shortly with your course access details."}
           </p>
           <button
             onClick={() => {
               setSubmitted(false);
+              setIsError(false); // Reset error state
               setFormData({
                 firstName: '',
                 lastName: '',
                 email: '',
                 phone: '',
                 course: '',
-                experience: '',
-                paymentMethod: '',
                 agreeTerms: false
               });
             }}
             className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
           >
-            Enroll Another Course
+            {isError ? "Try Again" : "Enroll Another Course"}
           </button>
         </div>
       </div>
@@ -133,10 +193,10 @@ const EnrollmentForm: React.FC = () => {
             Enroll Now
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-bold text-accent-900 mb-6">
-            Enroll in Our 
+            Enroll in Our
             <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
               {" "}
-             Premium Courses
+              Premium Courses
             </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -188,7 +248,7 @@ const EnrollmentForm: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Initiate Your Enrollment</h2>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Information */}
                 <div>
@@ -260,7 +320,7 @@ const EnrollmentForm: React.FC = () => {
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder="+977 (980) 123-4567"
                       />
                     </div>
                   </div>
@@ -270,7 +330,7 @@ const EnrollmentForm: React.FC = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                     <GraduationCap className="w-5 h-5 text-green-600" />
-                    Course & Experience
+                    Select Course
                   </h3>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
@@ -292,61 +352,8 @@ const EnrollmentForm: React.FC = () => {
                         ))}
                       </select>
                     </div>
-                    {/* <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Investment Experience *
-                      </label>
-                      <select
-                        name="experience"
-                        value={formData.experience}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                      >
-                        <option value="">Select your level</option>
-                        <option value="beginner">Complete Beginner</option>
-                        <option value="some">Some Experience</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                      </select>
-                    </div> */}
                   </div>
                 </div>
-
-                {/* Payment Method */}
-                {/* <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <CreditCard className="w-5 h-5 text-green-600" />
-                    Payment Method
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {['credit-card', 'paypal', 'bank-transfer'].map((method) => (
-                      <label
-                        key={method}
-                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                          formData.paymentMethod === method
-                            ? 'border-green-500 bg-green-50'
-                            : 'border-gray-200 hover:border-green-300'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value={method}
-                          checked={formData.paymentMethod === method}
-                          onChange={handleInputChange}
-                          className="sr-only"
-                        />
-                        <div className="text-center w-full">
-                          <CreditCard className="w-6 h-6 mx-auto mb-2 text-gray-600" />
-                          <span className="text-sm font-medium capitalize">
-                            {method.replace('-', ' ')}
-                          </span>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </div> */}
 
                 {/* Course Summary */}
                 {selectedCourse && (
@@ -384,6 +391,13 @@ const EnrollmentForm: React.FC = () => {
                   </label>
                 </div>
 
+                {/* Submission Message Display */}
+                {submissionMessage && (
+                  <div className={`p-3 rounded-lg text-center font-medium ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                    {submissionMessage}
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="submit"
@@ -403,33 +417,6 @@ const EnrollmentForm: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Trust Indicators */}
-        {/* <div className="mt-12 bg-white rounded-2xl shadow-xl p-8">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Expert Instructors</h3>
-              <p className="text-gray-600">Learn from industry professionals with 20+ years of experience</p>
-            </div>
-            <div>
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Lifetime Access</h3>
-              <p className="text-gray-600">Access course materials and updates forever, at your own pace</p>
-            </div>
-            <div>
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">4.8/5 Rating</h3>
-              <p className="text-gray-600">Trusted by over 10,000 students worldwide</p>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

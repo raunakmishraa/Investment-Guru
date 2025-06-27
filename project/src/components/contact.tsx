@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Send, 
-  User, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  User,
   MessageSquare,
   Building,
   Calendar,
@@ -15,16 +15,21 @@ import {
 } from 'lucide-react';
 
 const Contact = () => {
+  // --- STATE DECLARATIONS ---
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     subject: '',
     message: '',
-    // service: ''
+    // service: '' // Uncomment if you add this back to your form
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  // FIX: Added 'submitting' to the SubmitStatus type
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  // Google Apps Script Web App URL
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz17EdNMvFs78XCC3ikNClrrBtgmigvV8BuSLvaBSw0sfJQJUpU5ynd50Q3x0OBnSpw/exec';
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -33,13 +38,24 @@ const Contact = () => {
     });
   };
 
+  // --- handleSubmit FUNCTION ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitStatus('submitting'); // This line sets the status to 'submitting'
+
+    try {
+      const params = new URLSearchParams();
+      for (const [key, value] of Object.entries(formData)) {
+        params.append(key, value);
+      }
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: params,
+      });
+
       setSubmitStatus('success');
       setFormData({
         name: '',
@@ -49,31 +65,19 @@ const Contact = () => {
         message: '',
         // service: ''
       });
-      
-      // Reset success message after 5 seconds
+
       setTimeout(() => setSubmitStatus('idle'), 5000);
-    }, 2000);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
-    // {
-    //   icon: MapPin,
-    //   title: 'Visit Our Office',
-    //   details: ['Durbar Marg, Kathmandu', 'Nepal - 44600'],
-    //   color: 'from-primary-500 to-primary-600'
-    // },
-    // {
-    //   icon: Phone,
-    //   title: 'Call Us',
-    //   details: ['+977-1-4567890', '+977-9841234567'],
-    //   color: 'from-secondary-500 to-secondary-600'
-    // },
-    // {
-    //   icon: Mail,
-    //   title: 'Email Us',
-    //   details: ['info@investmentguru.com.np', 'support@investmentguru.com.np'],
-    //   color: 'from-accent-500 to-accent-600'
-    // },
     {
       icon: Clock,
       title: 'Business Hours',
@@ -82,15 +86,15 @@ const Contact = () => {
     }
   ];
 
-  const services = [
-    'Portfolio Management',
-    'Investment Planning',
-    'Risk Management',
-    'Retirement Planning',
-    'Tax Advisory',
-    'Market Analysis',
-    'Other'
-  ];
+  // const services = [
+  //   'Portfolio Management',
+  //   'Investment Planning',
+  //   'Risk Management',
+  //   'Retirement Planning',
+  //   'Tax Advisory',
+  //   'Market Analysis',
+  //   'Other'
+  // ];
 
   return (
     <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
@@ -113,14 +117,14 @@ const Contact = () => {
             <MessageSquare size={16} className="mr-2 flex-shrink-0" />
             <span className="whitespace-nowrap">Get In Touch</span>
           </motion.div>
-          
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent-900 mb-4 sm:mb-6 px-2">
             Contact Our
             <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent"> Expert Team</span>
           </h2>
-          
+
           <p className="text-lg sm:text-xl text-accent-600 max-w-3xl mx-auto px-4">
-            Ready to start your investment journey? Get in touch with our experienced advisors 
+            Ready to start your investment journey? Get in touch with our experienced advisors
             for personalized financial guidance and investment solutions.
           </p>
         </motion.div>
@@ -164,6 +168,16 @@ const Contact = () => {
               >
                 <AlertCircle size={20} className="text-red-600 mr-3 flex-shrink-0 mt-0.5" />
                 <span className="text-red-800 text-sm sm:text-base">Something went wrong. Please try again.</span>
+              </motion.div>
+            )}
+            {/* Conditional rendering for "submitting" status message */}
+            {isSubmitting && submitStatus === 'submitting' && ( // This is line 203 where the fix applies
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start"
+              >
+                <span className="text-blue-800 text-sm sm:text-base">Sending message...</span>
               </motion.div>
             )}
 
@@ -366,7 +380,7 @@ const Contact = () => {
                 </div>
               </div>
               <p className="text-sm sm:text-base text-primary-100 mb-4 sm:mb-6 leading-relaxed">
-                Get personalized investment advice tailored to your financial goals. 
+                Get personalized investment advice tailored to your financial goals.
                 Our certified advisors are ready to help you make informed decisions.
               </p>
               <motion.button
@@ -391,11 +405,11 @@ const Contact = () => {
                 <MapPin size={18} className="text-primary-600 mr-2 flex-shrink-0" />
                 <span>Find Us</span>
               </h4>
-              
+
               {/* Google Maps Embed */}
               <div className="relative w-full h-64 sm:h-80 rounded-lg overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.399642561279!2d85.31594317903739!3d27.70494456421077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190017ac507d%3A0xc32bb8832534e192!2sANM%20Print%20house!5e0!3m2!1sen!2snp!4v1750942647657!5m2!1sen!2snp"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0000000000005!2d85.31388888888888!3d27.700000000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a419c8d37f%3A0x6e7e4e1a0b3f5c2!2sDurbar%20Marg%2C%20Kathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2sus!4v1719503487440!5m2!1sen!2sus"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -406,7 +420,7 @@ const Contact = () => {
                   className="rounded-lg"
                 />
               </div>
-              
+
               {/* Map Info */}
               <div className="mt-4 p-3 bg-gray-50 rounded-lg">
                 <p className="text-sm text-accent-600 mb-1">
@@ -417,6 +431,7 @@ const Contact = () => {
                 </p>
               </div>
             </motion.div>
+
           </motion.div>
         </div>
       </div>
