@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment - Investment Guru</title>
+    <link rel="icon" type="image/x-icon" href="./public/logo.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="./public/510635494_29975439058770470_7431767674793111893_n.jpg" alt="Investment Guru Logo" class="logo-img">
+                    <div class="logo-text">
+                        <h1 class="logo-title">Investment Guru</h1>
+                        <p class="logo-subtitle">Because every investor needs a guru.</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="index.html#services" class="nav-link">
+                        <i data-lucide="book-open-text"></i>
+                        <span>Courses</span>
+                    </a>
+                    <a href="index.html#about" class="nav-link">
+                        <i data-lucide="shield"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="index.html#contact" class="nav-btn">Contact Us</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu">
+                <div class="mobile-menu-content">
+                    <a href="index.html#services" class="mobile-nav-link">
+                        <i data-lucide="book-open-text"></i>
+                        <span>Courses</span>
+                    </a>
+                    <a href="index.html#about" class="mobile-nav-link">
+                        <i data-lucide="shield"></i>
+                        <span>About</span>
+                    </a>
+                    <div class="mobile-nav-btn-container">
+                        <a href="index.html#contact" class="mobile-nav-btn">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Enrollment Section -->
+    <section class="enrollment">
+        <div class="enrollment-container">
+            <!-- Header -->
+            <div class="enrollment-header">
+                <div class="section-badge">
+                    <i data-lucide="book-open"></i>
+                    Enroll Now
+                </div>
+                <h1 class="enrollment-title">
+                    Enroll in Our
+                    <span class="section-title-gradient"> Premium Courses</span>
+                </h1>
+                <p class="enrollment-description">
+                    Join thousands of successful investors who have transformed their financial future with our expert-led courses.
+                </p>
+            </div>
+
+            <!-- Success Message -->
+            <div id="enrollment-success" class="enrollment-success" style="display: none;">
+                <div class="enrollment-success-content">
+                    <div class="enrollment-success-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h2 class="enrollment-success-title">Enrollment Successful!</h2>
+                    <p class="enrollment-success-message">Welcome to Investment Guru! You'll receive a confirmation email shortly with your course access details.</p>
+                    <button class="enrollment-success-btn" onclick="resetEnrollmentForm()">Enroll Another Course</button>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="enrollment-error" class="enrollment-error" style="display: none;">
+                <div class="enrollment-error-content">
+                    <div class="enrollment-error-icon">
+                        <i data-lucide="x"></i>
+                    </div>
+                    <h2 class="enrollment-error-title">Enrollment Failed!</h2>
+                    <p class="enrollment-error-message">There was an error processing your enrollment. Please try again.</p>
+                    <button class="enrollment-error-btn" onclick="hideEnrollmentMessages()">Try Again</button>
+                </div>
+            </div>
+
+            <div id="enrollment-content" class="enrollment-content">
+                <!-- Course Selection -->
+                <div class="enrollment-courses">
+                    <div class="enrollment-courses-container">
+                        <h3 class="enrollment-courses-title">Available Courses</h3>
+                        <div class="enrollment-courses-list">
+                            <div class="enrollment-course" data-course="beginner-trading">
+                                <div class="enrollment-course-content">
+                                    <h4 class="enrollment-course-name">Stock Market 101: Decode the Basics</h4>
+                                    <span class="enrollment-course-price">NRs. 3000</span>
+                                </div>
+                                <div class="enrollment-course-details">
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="clock"></i>
+                                        8 weeks
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="star"></i>
+                                        4.9
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="user"></i>
+                                        280
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="enrollment-course" data-course="advanced-course">
+                                <div class="enrollment-course-content">
+                                    <h4 class="enrollment-course-name">Advance Course: Technical Analysis Mastery</h4>
+                                    <span class="enrollment-course-price">NRs. 5000</span>
+                                </div>
+                                <div class="enrollment-course-details">
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="clock"></i>
+                                        12 weeks
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="star"></i>
+                                        4.8
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="user"></i>
+                                        152
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="enrollment-course" data-course="transformation-course">
+                                <div class="enrollment-course-content">
+                                    <h4 class="enrollment-course-name">Basic to Advance course: Complete Transformation Program</h4>
+                                    <span class="enrollment-course-price">NRs. 10,000</span>
+                                </div>
+                                <div class="enrollment-course-details">
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="clock"></i>
+                                        6 weeks
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="star"></i>
+                                        4.7
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="user"></i>
+                                        41
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="enrollment-course" data-course="pro-course">
+                                <div class="enrollment-course-content">
+                                    <h4 class="enrollment-course-name">Pro Trader: Mastering the Market Moves</h4>
+                                    <span class="enrollment-course-price">NRs. 12,000</span>
+                                </div>
+                                <div class="enrollment-course-details">
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="clock"></i>
+                                        10 weeks
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="star"></i>
+                                        4.9
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="user"></i>
+                                        76
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="enrollment-course" data-course="recovery-course">
+                                <div class="enrollment-course-content">
+                                    <h4 class="enrollment-course-name">From Loss to Profit: The Recovery Course</h4>
+                                    <span class="enrollment-course-price">NRs. 15,000</span>
+                                </div>
+                                <div class="enrollment-course-details">
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="clock"></i>
+                                        10 weeks
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="star"></i>
+                                        4.9
+                                    </div>
+                                    <div class="enrollment-course-detail">
+                                        <i data-lucide="user"></i>
+                                        87
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enrollment Form -->
+                <div class="enrollment-form-container">
+                    <h2 class="enrollment-form-title">Initiate Your Enrollment</h2>
+
+                    <form id="enrollment-form" class="enrollment-form">
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <i data-lucide="user"></i>
+                                Personal Information
+                            </h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" name="firstName" required class="form-input" placeholder="Enter your first name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name *</label>
+                                    <input type="text" name="lastName" required class="form-input" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <i data-lucide="mail"></i>
+                                Contact Information
+                            </h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Email Address *</label>
+                                    <input type="email" name="email" required class="form-input" placeholder="your.email@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number *</label>
+                                    <input type="tel" name="phone" required class="form-input" placeholder="+977 (980) 123-4567">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Course Selection -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <i data-lucide="graduation-cap"></i>
+                                Select Course
+                            </h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Select Course *</label>
+                                    <select name="course" id="course-select" required class="form-input">
+                                        <option value="">Choose a course</option>
+                                        <option value="beginner-trading">Stock Market 101: Decode the Basics - NRs. 3000</option>
+                                        <option value="advanced-course">Advance Course: Technical Analysis Mastery - NRs. 5000</option>
+                                        <option value="transformation-course">Basic to Advance course: Complete Transformation Program - NRs. 10,000</option>
+                                        <option value="pro-course">Pro Trader: Mastering the Market Moves - NRs. 12,000</option>
+                                        <option value="recovery-course">From Loss to Profit: The Recovery Course - NRs. 15,000</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Course Summary -->
+                        <div id="course-summary" class="course-summary" style="display: none;">
+                            <h3 class="course-summary-title">Course Summary</h3>
+                            <div class="course-summary-content">
+                                <div class="course-summary-info">
+                                    <p id="selected-course-name" class="course-summary-name"></p>
+                                    <p id="selected-course-details" class="course-summary-details"></p>
+                                </div>
+                                <div class="course-summary-price">
+                                    <p id="selected-course-price" class="course-summary-price-value"></p>
+                                    <p class="course-summary-price-label">One-time payment</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-terms">
+                            <input type="checkbox" name="agreeTerms" id="agreeTerms" required class="form-checkbox">
+                            <label for="agreeTerms" class="form-terms-label">
+                                I agree to the <a href="#" class="form-terms-link">Terms of Service</a>
+                                and <a href="#" class="form-terms-link">Privacy Policy</a>.
+                                I understand that this course purchase is non-refundable after 7 days.
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="enrollment-submit-btn">
+                            <span class="submit-text">Enroll Now</span>
+                            <span class="submit-loading" style="display: none;">
+                                <div class="loading-spinner"></div>
+                                Processing Enrollment...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-company">
+                    <div class="footer-logo">
+                        <img src="./public/510635494_29975439058770470_7431767674793111893_n.jpg" alt="Investment Guru Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3 class="footer-logo-title">Investment Guru</h3>
+                            <p class="footer-logo-subtitle">Because every investor needs a guru.</p>
+                        </div>
+                    </div>
+                    
+                    <p class="footer-description">
+                        Your trusted partner in building wealth and securing financial freedom. 
+                        With over 15 years of experience, we provide expert investment guidance 
+                        tailored to your unique financial goals.
+                    </p>
+
+                    <!-- Contact Info -->
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <i data-lucide="map-pin"></i>
+                            <span>Kathmandu, Nepal</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i data-lucide="phone"></i>
+                            <span>+977-1-4567890</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i data-lucide="mail"></i>
+                            <span>info@investmentguru.com.np</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <h4 class="footer-links-title">Company</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html#services">Courses</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="consultation.html">Schedule a Call</a></li>
+                        <li><a href="enrollment.html">Enroll Now</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 Investment Guru. All rights reserved. | Licensed by SEBON
+                </p>
+                
+                <!-- Social Links -->
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/profile.php?id=61577410238664" class="footer-social-link" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

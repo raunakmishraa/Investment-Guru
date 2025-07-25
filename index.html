@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Guru - Your Path to Financial Success</title>
+    <link rel="icon" type="image/x-icon" href="./public/logo.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="./public/510635494_29975439058770470_7431767674793111893_n.jpg" alt="Investment Guru Logo" class="logo-img">
+                    <div class="logo-text">
+                        <h1 class="logo-title">Investment Guru</h1>
+                        <p class="logo-subtitle">Because every investor needs a guru.</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="#services" class="nav-link">
+                        <i data-lucide="book-open-text"></i>
+                        <span>Courses</span>
+                    </a>
+                    <a href="#about" class="nav-link">
+                        <i data-lucide="shield"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="#contact" class="nav-btn">Contact Us</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu">
+                <div class="mobile-menu-content">
+                    <a href="#services" class="mobile-nav-link">
+                        <i data-lucide="book-open-text"></i>
+                        <span>Courses</span>
+                    </a>
+                    <a href="#about" class="mobile-nav-link">
+                        <i data-lucide="shield"></i>
+                        <span>About</span>
+                    </a>
+                    <div class="mobile-nav-btn-container">
+                        <a href="#contact" class="mobile-nav-btn">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-bg-element hero-bg-1"></div>
+            <div class="hero-bg-element hero-bg-2"></div>
+            <div class="hero-bg-element hero-bg-3"></div>
+        </div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <!-- Left Content -->
+                <div class="hero-left">
+                    <div class="hero-badge">
+                        <i data-lucide="trending-up"></i>
+                        #1 Investment Advisory in Nepal
+                    </div>
+
+                    <h1 class="hero-title">
+                        Your Path to
+                        <span class="hero-title-gradient"> Financial </span>
+                        Success
+                    </h1>
+
+                    <p class="hero-description">
+                        Expert investment guidance, personalized strategies, and proven results. 
+                        Let us help you build wealth and secure your financial future with confidence.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#services" class="hero-btn-primary">
+                            Start Learning Today
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                        <a href="consultation.html" class="hero-btn-secondary">
+                            Free Consultation
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon">
+                                <i data-lucide="target"></i>
+                            </div>
+                            <div class="hero-stat-value">5+</div>
+                            <div class="hero-stat-label">Years Experience</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon">
+                                <i data-lucide="users"></i>
+                            </div>
+                            <div class="hero-stat-value">500+</div>
+                            <div class="hero-stat-label">Happy Clients</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <div class="hero-stat-value">25%</div>
+                            <div class="hero-stat-label">Portfolio Growth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="hero-right">
+                    <div class="hero-image-container">
+                        <div class="hero-image-bg"></div>
+                        <img src="./public/510635494_29975439058770470_7431767674793111893_n.jpg" alt="Investment Guru" class="hero-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-indicator-inner">
+                <div class="scroll-indicator-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="services-container">
+            <!-- Header -->
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="users"></i>
+                    Our Courses
+                </div>
+                
+                <h2 class="section-title">
+                    Empower Your 
+                    <span class="section-title-gradient"> Trading </span>
+                    Journey
+                </h2>
+                
+                <p class="section-description">
+                    From foundational knowledge to advanced strategies and recovery techniques, our comprehensive suite of courses is designed to equip you with the skills to confidently navigate the stock market and achieve your financial goals.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <div class="service-card" data-service="stock-market-101">
+                    <div class="service-icon service-icon-1">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3 class="service-title">Stock Market 101: Decode the Basics</h3>
+                    <p class="service-description">Professional portfolio management tailored to your risk tolerance and financial goals.</p>
+                    <ul class="service-features">
+                        <li>Diversified Investments</li>
+                        <li>Risk Assessment</li>
+                        <li>Regular Rebalancing</li>
+                    </ul>
+                    <button class="service-btn">Enroll Now</button>
+                </div>
+
+                <div class="service-card" data-service="technical-analysis">
+                    <div class="service-icon service-icon-2">
+                        <i data-lucide="pie-chart"></i>
+                    </div>
+                    <h3 class="service-title">Advance Course: Technical Analysis Mastery</h3>
+                    <p class="service-description">Strategic investment planning to maximize returns and minimize risks for long-term growth.</p>
+                    <ul class="service-features">
+                        <li>Goal-Based Planning</li>
+                        <li>Asset Allocation</li>
+                        <li>Tax Optimization</li>
+                    </ul>
+                    <button class="service-btn">Enroll Now</button>
+                </div>
+
+                <div class="service-card" data-service="transformation-program">
+                    <div class="service-icon service-icon-3">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <h3 class="service-title">Basic to Advance course: Complete Transformation Program</h3>
+                    <p class="service-description">Comprehensive risk assessment and mitigation strategies to protect your investments.</p>
+                    <ul class="service-features">
+                        <li>Risk Analysis</li>
+                        <li>Insurance Planning</li>
+                        <li>Emergency Funds</li>
+                    </ul>
+                    <button class="service-btn">Enroll Now</button>
+                </div>
+
+                <div class="service-card" data-service="pro-trader">
+                    <div class="service-icon service-icon-4">
+                        <i data-lucide="move"></i>
+                    </div>
+                    <h3 class="service-title">Pro Trader: Mastering the Market Moves</h3>
+                    <p class="service-description">Secure your future with our comprehensive retirement planning and wealth preservation.</p>
+                    <ul class="service-features">
+                        <li>Pension Planning</li>
+                        <li>Wealth Preservation</li>
+                        <li>Income Strategies</li>
+                    </ul>
+                    <button class="service-btn">Enroll Now</button>
+                </div>
+
+                <div class="service-card" data-service="recovery-course">
+                    <div class="service-icon service-icon-5">
+                        <i data-lucide="undo-2"></i>
+                    </div>
+                    <h3 class="service-title">From Loss to Profit: The Recovery Course</h3>
+                    <p class="service-description">Expert tax planning and advisory services to optimize your investment returns.</p>
+                    <ul class="service-features">
+                        <li>Tax Planning</li>
+                        <li>Deduction Strategies</li>
+                        <li>Compliance Support</li>
+                    </ul>
+                    <button class="service-btn">Enroll Now</button>
+                </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="services-cta">
+                <div class="services-cta-content">
+                    <h3 class="services-cta-title">Ready to Start Your Investment Journey?</h3>
+                    <p class="services-cta-description">
+                        Get personalized investment advice from our expert team. Schedule a free consultation today.
+                    </p>
+                    <button class="services-cta-btn" onclick="window.location.href='consultation.html'">
+                        Schedule Free Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <!-- Header -->
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="shield"></i>
+                    About Investment Guru
+                </div>
+                
+                <h2 class="section-title">
+                    Building Wealth Through
+                    <span class="section-title-gradient"> Expert Guidance</span>
+                </h2>
+            </div>
+
+            <div class="about-content">
+                <!-- Left Content -->
+                <div class="about-left">
+                    <h3 class="about-subtitle">5+ Years of Investment Excellence</h3>
+                    
+                    <p class="about-text">
+                        Investment Guru is a forward-thinking financial education and consulting company dedicated to reshape the way individuals understand and participate in the share market. With a focus on in-depth market analysis, comprehensive training, and personalized mentorship, we provide a full spectrum of services aimed at empowering individuals to make informed, confident, and strategic investment decisions.
+                    </p>
+
+                    <p class="about-text">
+                        Founded with a clear mission — to make the share market simple and easy for everyone — Investment Guru has positioned itself as a trusted partner for beginners, intermediate traders, and seasoned investors alike. We believe that financial literacy is not a privilege but a necessity, and we are committed to making high-quality stock market education accessible to all, regardless of background or experience.
+                    </p>
+
+                    <button class="about-btn">Learn More About Us</button>
+                </div>
+
+                <!-- Right Content -->
+                <div class="about-right">
+                    <div class="about-image-container">
+                        <img src="./public/510635494_29975439058770470_7431767674793111893_n.jpg" alt="Investment Guru" class="about-image">
+                        <div class="about-image-content">
+                            <h4 class="about-image-title">Investment Guru</h4>
+                            <p class="about-image-subtitle">Because every investor needs a guru.</p>
+                        </div>
+                        <div class="about-image-bg-1"></div>
+                        <div class="about-image-bg-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Include -->
+            <div class="about-services">
+                <h3 class="about-services-title">Our Services Include</h3>
+                
+                <div class="about-services-grid">
+                    <div class="about-service-card">
+                        <div class="about-service-icon about-service-icon-1">
+                            <i data-lucide="alarm-clock"></i>
+                        </div>
+                        <h4 class="about-service-title">Real-time Market Analysis</h4>
+                        <p class="about-service-description">We deliver precise, data-driven insights and expert market interpretation to help clients stay ahead of trends and identify smart opportunities in the stock market.</p>
+                    </div>
+
+                    <div class="about-service-card">
+                        <div class="about-service-icon about-service-icon-2">
+                            <i data-lucide="dollar-sign"></i>
+                        </div>
+                        <h4 class="about-service-title">Stock Market Training</h4>
+                        <p class="about-service-description">Our structured training programs are offered both online and through physical workshops, making it convenient for learners across all regions. These programs are designed to simplify complex market concepts and teach actionable skills.</p>
+                    </div>
+
+                    <div class="about-service-card">
+                        <div class="about-service-icon about-service-icon-3">
+                            <i data-lucide="user-round"></i>
+                        </div>
+                        <h4 class="about-service-title">Personal Consultations</h4>
+                        <p class="about-service-description">We provide one-on-one guidance tailored to individual goals, helping clients build and refine their trading or investing strategies.</p>
+                    </div>
+
+                    <div class="about-service-card">
+                        <div class="about-service-icon about-service-icon-4">
+                            <i data-lucide="rocket"></i>
+                        </div>
+                        <h4 class="about-service-title">Strategy Building & Planning</h4>
+                        <p class="about-service-description">Our experts work closely with clients to develop personalized strategies that align with their financial goals, risk profiles, and market outlooks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <!-- Header -->
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="message-square"></i>
+                    Get In Touch
+                </div>
+                
+                <h2 class="section-title">
+                    Contact Our
+                    <span class="section-title-gradient"> Expert Team</span>
+                </h2>
+                
+                <p class="section-description">
+                    Ready to start your investment journey? Get in touch with our experienced advisors
+                    for personalized financial guidance and investment solutions.
+                </p>
+            </div>
+
+            <div class="contact-content">
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <div class="contact-form-header">
+                        <div class="contact-form-icon">
+                            <i data-lucide="send"></i>
+                        </div>
+                        <div class="contact-form-title-container">
+                            <h3 class="contact-form-title">Send us a Message</h3>
+                            <p class="contact-form-subtitle">We'll get back to you within 24 hours</p>
+                        </div>
+                    </div>
+
+                    <!-- Status Messages -->
+                    <div id="contact-success" class="contact-message contact-success" style="display: none;">
+                        <i data-lucide="check-circle"></i>
+                        <span>Message sent successfully! We'll contact you soon.</span>
+                    </div>
+
+                    <div id="contact-error" class="contact-message contact-error" style="display: none;">
+                        <i data-lucide="alert-circle"></i>
+                        <span>Something went wrong. Please try again.</span>
+                    </div>
+
+                    <div id="contact-submitting" class="contact-message contact-submitting" style="display: none;">
+                        <span>Sending message...</span>
+                    </div>
+
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <div class="form-input-container">
+                                    <i data-lucide="user"></i>
+                                    <input type="text" id="name" name="name" required class="form-input" placeholder="Your full name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <div class="form-input-container">
+                                    <i data-lucide="mail"></i>
+                                    <input type="email" id="email" name="email" required class="form-input" placeholder="your.email@example.com">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <div class="form-input-container">
+                                    <i data-lucide="phone"></i>
+                                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="+977-9841234567">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <input type="text" id="subject" name="subject" required class="form-input" placeholder="What can we help you with?">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" required rows="4" class="form-textarea" placeholder="Tell us more about your investment goals and how we can help..."></textarea>
+                        </div>
+
+                        <button type="submit" class="contact-submit-btn">
+                            <span class="submit-text">Send Message</span>
+                            <span class="submit-loading" style="display: none;">
+                                <div class="loading-spinner"></div>
+                                Sending Message...
+                            </span>
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <!-- Business Hours -->
+                    <div class="contact-info-card">
+                        <div class="contact-info-header">
+                            <div class="contact-info-icon contact-info-icon-1">
+                                <i data-lucide="clock"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h4 class="contact-info-title">Business Hours</h4>
+                                <p class="contact-info-detail">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                                <p class="contact-info-detail">Sat: 10:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps -->
+                    <div class="contact-map-container">
+                        <h4 class="contact-map-title">
+                            <i data-lucide="map-pin"></i>
+                            Find Us
+                        </h4>
+
+                        <div class="contact-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0000000000005!2d85.31388888888888!3d27.700000000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a419c8d37f%3A0x6e7e4e1a0b3f5c2!2sDurbar%20Marg%2C%20Kathmandu%2044600%2C%20Nepal!5e0!3m2!1sen!2sus!4v1719503487440!5m2!1sen!2sus"
+                                width="100%"
+                                height="100%"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Investment Guru Office Location - Durbar Marg, Kathmandu">
+                            </iframe>
+                        </div>
+
+                        <div class="contact-map-info">
+                            <p class="contact-map-detail">
+                                <strong>Address:</strong> Durbar Marg, Kathmandu, Nepal
+                            </p>
+                            <p class="contact-map-detail">
+                                <strong>Landmark:</strong> Near Kathmandu Guest House
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-company">
+                    <div class="footer-logo">
+                        <img src="./public/510635494_29975439058770470_7431767674793111893_n.jpg" alt="Investment Guru Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3 class="footer-logo-title">Investment Guru</h3>
+                            <p class="footer-logo-subtitle">Because every investor needs a guru.</p>
+                        </div>
+                    </div>
+                    
+                    <p class="footer-description">
+                        Your trusted partner in building wealth and securing financial freedom. 
+                        With over 15 years of experience, we provide expert investment guidance 
+                        tailored to your unique financial goals.
+                    </p>
+
+                    <!-- Contact Info -->
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <i data-lucide="map-pin"></i>
+                            <span>Kathmandu, Nepal</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i data-lucide="phone"></i>
+                            <span>+977-1-4567890</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i data-lucide="mail"></i>
+                            <span>info@investmentguru.com.np</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <h4 class="footer-links-title">Company</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="#services">Courses</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="consultation.html">Schedule a Call</a></li>
+                        <li><a href="enrollment.html">Enroll Now</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 Investment Guru. All rights reserved. | Licensed by SEBON
+                </p>
+                
+                <!-- Social Links -->
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/profile.php?id=61577410238664" class="footer-social-link" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="footer-social-link" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
